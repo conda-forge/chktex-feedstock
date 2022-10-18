@@ -6,7 +6,7 @@ set -eux
     --prefix=$PREFIX \
     --disable-pcre
 
-make chktex
+make all
 
 make install
 

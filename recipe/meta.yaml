@@ -1,13 +1,12 @@
-{% set name = "chktex" %}
 {% set version = "1.7.6" %}
 {% set am_version = "1.15" %}
 
 package:
-  name: {{ name }}
+  name: chktex
   version: {{ version }}
 
 source:
-  url: https://download.savannah.gnu.org/releases/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://download.savannah.gnu.org/releases/chktex/chktex-{{ version }}.tar.gz
   sha256: 8ac0e5ca213b2012d44c28f9e4feb9783df44750eb0c30a237d81ff58ef34c8d
   patches:
     - 000-makefile-no-dvi.patch
@@ -51,7 +50,7 @@ requirements:
 
 test:
   commands:
-    - conda inspect linkages -p $PREFIX {{ name }}  # [unix]
+    - conda inspect linkages -p $PREFIX chktex  # [unix]
     - chktex --version
     # these are shell scripts... but don't appear to be needed for chktex to "work"
     - deweb --version  # [unix]
