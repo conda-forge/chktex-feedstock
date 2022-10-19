@@ -1,16 +1,16 @@
-{% set name = "chktex" %}
-{% set version = "1.7.6" %}
+{% set version = "1.7.8" %}
 {% set am_version = "1.15" %}
 
 package:
-  name: {{ name }}
+  name: chktex
   version: {{ version }}
 
 source:
-  url: https://download.savannah.gnu.org/releases/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8ac0e5ca213b2012d44c28f9e4feb9783df44750eb0c30a237d81ff58ef34c8d
+  url: https://download.savannah.gnu.org/releases/chktex/chktex-{{ version }}.tar.gz
+  sha256: 5286f7844f0771ac0711c7313cf5e0421ed509dc626f9b43b4f4257fb1591ea8
   patches:
     - 000-makefile-no-dvi.patch
+    - 001-makefile-no-less.patch
   # TODO: figure out how to get osx to use ncurses
 
 build:
@@ -51,7 +51,6 @@ requirements:
 
 test:
   commands:
-    - conda inspect linkages -p $PREFIX {{ name }}  # [unix]
     - chktex --version
     # these are shell scripts... but don't appear to be needed for chktex to "work"
     - deweb --version  # [unix]
