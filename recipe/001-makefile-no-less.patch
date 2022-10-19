@@ -1,0 +1,11 @@
+--- Makefile.old.in	2022-10-19 07:29:19.131711592 -0500
++++ Makefile.in	2022-10-19 07:29:46.631676198 -0500
+@@ -185,7 +185,7 @@
+ 	rm -f $(DESTDIR)$(sysconfdir)/chktexrc  $(DESTDIR)$(mandir)/man1/deweb.1
+ 
+ test:
+-	chktex -v2 -mall $(srcdir)/Test.tex | less -r
++	chktex -v2 -mall $(srcdir)/Test.tex
+ 
+ indent:
+ 	indent -npsl -bli0 -npcs -nut -i4 $(SOURCEFILES)
