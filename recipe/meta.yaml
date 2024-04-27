@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://download.savannah.gnu.org/releases/chktex/chktex-{{ version }}.tar.gz
-  sha256: 1dd69e4dac47ce6d0104b3982e02a14c91c3b9de32869a378bb0adf41f04b171
+  sha256: df6ee31632a4f4a8e18849b804657e27e3d96deb3f237edbd25656415eb31195
   patches:
     - 000-makefile-no-dvi.patch
     - 001-makefile-no-less.patch
