@@ -28,7 +28,6 @@ requirements:
     - m2w64-pkg-config              # [win]
     - posix                         # [win]
     - {{ compiler('m2w64_c') }}     # [win]
-    - {{ stdlib("c") }}             # [win]
     - {{ compiler('c') }}           # [unix]
     - {{ stdlib("c") }}             # [unix]
     - autoconf                      # [unix]
