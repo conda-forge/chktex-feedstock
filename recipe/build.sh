@@ -3,8 +3,7 @@ set -eux
 
 # TODO: probably want pcre, but keep segfaulting with 8.44
 ./configure \
-    --prefix=$PREFIX \
-    --disable-pcre
+    --prefix=$PREFIX
 
 make all
 
