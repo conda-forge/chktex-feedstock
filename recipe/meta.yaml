@@ -42,13 +42,14 @@ requirements:
   host:
     - ncurses                       # [unix]
     - m2-ncurses                    # [win]
-    - pcre                          # [unix]
-    - m2-pcre                       # [win]
+    # TODO: probably want pcre, but keep segfaulting with 8.44
+    # - pcre                        # [unix]
+    # - m2-pcre                     # [win]
   run:
     - ncurses                       # [unix]
     - m2-ncurses                    # [win]
-    - pcre                          # [unix]
-    - m2-pcre                       # [win]
+    # - pcre                        # [unix]
+    # - m2-pcre                     # [win]
 
 test:
   commands:
