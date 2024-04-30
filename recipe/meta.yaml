@@ -1,4 +1,4 @@
-{% set version = "1.7.8" %}
+{% set version = "1.7.9" %}
 {% set am_version = "1.15" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://download.savannah.gnu.org/releases/chktex/chktex-{{ version }}.tar.gz
-  sha256: 5286f7844f0771ac0711c7313cf5e0421ed509dc626f9b43b4f4257fb1591ea8
+  sha256: df6ee31632a4f4a8e18849b804657e27e3d96deb3f237edbd25656415eb31195
   patches:
     - 000-makefile-no-dvi.patch
     - 001-makefile-no-less.patch
@@ -29,6 +29,7 @@ requirements:
     - posix                         # [win]
     - {{ compiler('m2w64_c') }}     # [win]
     - {{ compiler('c') }}           # [unix]
+    - {{ stdlib("c") }}             # [unix]
     - autoconf                      # [unix]
     - automake                      # [unix]
     - gettext                       # [unix]
