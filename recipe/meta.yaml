@@ -14,7 +14,7 @@ source:
   # TODO: figure out how to get osx to use ncurses
 
 build:
-  number: 0
+  number: 1
   missing_dso_whitelist:
     - /usr/lib/libncurses.5.4.dylib  # [osx]
 
@@ -25,8 +25,9 @@ requirements:
     - m2-libtool                    # [win]
     - m2-patch                      # [win]
     - m2-sed                        # [win]
-    - m2w64-pkg-config              # [win]
-    - posix                         # [win]
+    - m2-base                       # [win]
+    - m2-make                       # [win]
+    - pkg-config                    # [win]
     - {{ compiler('m2w64_c') }}     # [win]
     - {{ compiler('c') }}           # [unix]
     - {{ stdlib("c") }}             # [unix]
