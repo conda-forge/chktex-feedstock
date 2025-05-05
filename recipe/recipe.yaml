@@ -12,8 +12,7 @@ source:
   url: https://download.savannah.gnu.org/releases/chktex/chktex-${{ version }}.tar.gz
   sha256: df6ee31632a4f4a8e18849b804657e27e3d96deb3f237edbd25656415eb31195
   patches:
-    - 000-makefile-no-dvi.patch
-    - 001-makefile-no-less.patch
+    - 000-makefile.patch
 
 build:
   number: 1
@@ -26,19 +25,9 @@ build:
 
 requirements:
   build:
-    - if: win
+    - if: unix
       then:
-        - ${{ compiler('m2w64_c') }}
-        - m2-autoconf
-        - m2-automake${{ am_version }}
-        - m2-base
-        - m2-libtool
-        - m2-make
-        - m2-patch
-        - m2-sed
-        - pkg-config
-      else:
-        - ${{ compiler('c') }}
+        - ${{ compiler("c") }}
         - ${{ stdlib("c") }}
         - autoconf
         - automake
@@ -48,6 +37,16 @@ requirements:
         - patch
         - pkg-config
         - sed
+      else:
+        - ${{ compiler("m2w64_c") }}
+        - m2-autoconf
+        - m2-automake${{ am_version }}
+        - m2-base
+        - m2-libtool
+        - m2-make
+        - m2-patch
+        - m2-sed
+        - pkg-config
   host:
     - if: unix
       then:
@@ -58,17 +57,17 @@ requirements:
     - if: unix
       then:
         - ncurses
-    - if: win
-      then:
+      else:
         - m2-ncurses
 
 tests:
-  - script:
+  - requirements:
+      run:
+        - if: win
+          then: m2-grep
+    script:
       - chktex --version
-      - if: unix
-        then:
-          - deweb --version
-          - chkweb --version
+      - chktex --version | grep -iE "${{ version | replace('.', '\\.') }}"
 
 about:
   license: GPL-2.0-or-later

@@ -1,0 +1,22 @@
+diff --git a/Makefile.in b/Makefile.in
+index 4c8222e..c5cf5c1 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -161,7 +161,7 @@ check: chktex $(srcdir)/$(TestOutFile) chktexrc
+ chktex: $(OBJS)
+ 	$(CC) $(LDFLAGS) -o chktex $(OBJS) $(LIBS)
+ 
+-install: chktex ChkTeX.dvi
++install: chktex
+ 	$(MKDIR_P) $(DESTDIR)$(bindir)
+ 	for program in chktex $(BUILT_SCRIPTS); do \
+ 		$(INSTALL_PROGRAM) $$program $(DESTDIR)$(bindir); \
+@@ -185,7 +185,7 @@ uninstall:
+ 	rm -f $(DESTDIR)$(sysconfdir)/chktexrc  $(DESTDIR)$(mandir)/man1/deweb.1
+ 
+ test:
+-	chktex -v2 -mall $(srcdir)/Test.tex | less -r
++	chktex -v2 -mall $(srcdir)/Test.tex
+ 
+ indent:
+ 	indent -npsl -bli0 -npcs -nut -i4 $(SOURCEFILES)
