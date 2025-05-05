@@ -11,4 +11,6 @@ github:
 provider:
   linux_aarch64: azure
   linux_ppc64le: azure
+# remove after https://github.com/prefix-dev/rattler-build/issues/1608
+remote_ci_setup: rattler-build<0.41.0
 test: native_and_emulated
