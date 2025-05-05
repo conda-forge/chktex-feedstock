@@ -17,7 +17,6 @@ replacement for the built-in checker in LaTeX; however it catches some
 typographic errors LaTeX oversees. In other words, it is Lint for LaTeX.
 Filters are also provided for checking the LaTeX parts of CWEB documents.
 
-
 Current build status
 ====================
 
