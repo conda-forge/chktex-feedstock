@@ -18,10 +18,6 @@ build:
   number: 1
   script:
     file: build-chktex
-  dynamic_linking:
-    missing_dso_allowlist:
-      - if: osx
-        then: /usr/lib/libncurses.5.4.dylib
 
 requirements:
   build:
@@ -47,18 +43,6 @@ requirements:
         - m2-patch
         - m2-sed
         - pkg-config
-  host:
-    - if: unix
-      then:
-        - ncurses
-      else:
-        - m2-ncurses
-  run:
-    - if: unix
-      then:
-        - ncurses
-      else:
-        - m2-ncurses
 
 tests:
   - requirements:
