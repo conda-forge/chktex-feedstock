@@ -1,0 +1,88 @@
+schema_version: 1
+
+context:
+  version: 1.7.9
+  am_version: 1.15
+
+package:
+  name: chktex
+  version: ${{ version }}
+
+source:
+  url: https://download.savannah.gnu.org/releases/chktex/chktex-${{ version }}.tar.gz
+  sha256: df6ee31632a4f4a8e18849b804657e27e3d96deb3f237edbd25656415eb31195
+  patches:
+    - 000-makefile-no-dvi.patch
+    - 001-makefile-no-less.patch
+
+build:
+  number: 1
+  script:
+    file: build-chktex
+  dynamic_linking:
+    missing_dso_allowlist:
+      - if: osx
+        then: /usr/lib/libncurses.5.4.dylib
+
+requirements:
+  build:
+    - if: win
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - m2-autoconf
+        - m2-automake${{ am_version }}
+        - m2-base
+        - m2-libtool
+        - m2-make
+        - m2-patch
+        - m2-sed
+        - pkg-config
+      else:
+        - ${{ compiler('c') }}
+        - ${{ stdlib("c") }}
+        - autoconf
+        - automake
+        - gettext
+        - libtool
+        - make
+        - patch
+        - pkg-config
+        - sed
+  host:
+    - if: unix
+      then:
+        - ncurses
+      else:
+        - m2-ncurses
+  run:
+    - if: unix
+      then:
+        - ncurses
+    - if: win
+      then:
+        - m2-ncurses
+
+tests:
+  - script:
+      - chktex --version
+      - if: unix
+        then:
+          - deweb --version
+          - chkweb --version
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: LaTeX semantic checker
+  description: |
+    This program has been written in frustration because some constructs in
+    LaTeX are sometimes non-intuitive, and easy to forget. It is _not_ a
+    replacement for the built-in checker in LaTeX; however it catches some
+    typographic errors LaTeX oversees. In other words, it is Lint for LaTeX.
+    Filters are also provided for checking the LaTeX parts of CWEB documents.
+  homepage: https://www.nongnu.org/chktex
+  repository: https://savannah.nongnu.org/projects/chktex
+
+extra:
+  recipe-maintainers:
+    - bollwyvl
