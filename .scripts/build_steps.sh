@@ -35,7 +35,7 @@ mv /opt/conda/conda-meta/history /opt/conda/conda-meta/history.$(date +%Y-%m-%d-
 echo > /opt/conda/conda-meta/history
 micromamba install --root-prefix ~/.conda --prefix /opt/conda \
     --yes --override-channels --channel conda-forge --strict-channel-priority \
-    pip  rattler-build conda-forge-ci-setup=4 'rattler-build!=0.41.0'
+    pip  rattler-build conda-forge-ci-setup=4 rattler-build=0.40 conda-build=25
 export CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1
 
 # set up the condarc
