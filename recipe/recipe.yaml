@@ -9,7 +9,9 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://download.savannah.gnu.org/releases/chktex/chktex-${{ version }}.tar.gz
+  # the canonical URL now redirects to a mirror pool, some of which redirect _again_...
+  # url: https://download.savannah.gnu.org/releases/chktex/chktex-${{ version }}.tar.gz
+  url: https://mirrors.ocf.berkeley.edu/nongnu/chktex/chktex-${{ version }}.tar.gz
   sha256: df6ee31632a4f4a8e18849b804657e27e3d96deb3f237edbd25656415eb31195
   patches:
     - 000-makefile.patch
