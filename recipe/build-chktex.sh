@@ -3,7 +3,7 @@ set -eux -o pipefail
 
 # https://github.com/conda-forge/chktex-feedstock/pull/8
 ## maybe double-packed?
-ls configure || cd "${PKG_NAME}-${PKG_VERSION}" || echo "seems ok"
+ls configure || cd "${PKG_NAME}-${PKG_VERSION}"
 
 ls configure
 
