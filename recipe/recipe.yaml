@@ -1,0 +1,77 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: "1.7.10"
+  am_version: "1.15"
+  posix_prefix: ${{ "m2-" if win else "" }}
+
+package:
+  name: chktex
+  version: ${{ version }}
+
+source:
+  # TODO: figure out how to get osx to use ncurses
+  url: https://download.savannah.gnu.org/releases/chktex/chktex-${{ version }}.tar.gz
+  sha256: cea81a1cde2f151db2b5d2adf2271becfd3c0c1f40eca5cf45b52beeb4a636f9
+  patches:
+    - 000-makefile-no-dvi.patch
+    - 001-makefile-no-less.patch
+
+build:
+  number: 0
+  script:
+    file: build-chktex
+  dynamic_linking:
+    missing_dso_allowlist:
+      - if: osx
+        then: /usr/lib/libncurses.5.4.dylib
+
+requirements:
+  build:
+    - pkg-config
+    - ${{ posix_prefix }}autoconf
+    - ${{ posix_prefix }}libtool
+    - ${{ posix_prefix }}patch
+    - ${{ posix_prefix }}sed
+    - ${{ posix_prefix }}base
+    - ${{ posix_prefix }}make
+    - if: unix
+      then:
+        - ${{ compiler("c") }}
+        - ${{ stdlib("c") }}
+        - automake
+        - gettext
+      else:
+        - ${{ compiler("m2w64_c") }}
+        - ${{ stdlib("m2w64_c") }}
+        - m2-automake{{ am_version }}
+  host:
+    - ${{ posix_prefix }}ncurses
+  run:
+    - ${{ posix_prefix }}ncurses
+
+tests:
+  - script:
+      - chktex --version
+      - if: unix
+        then:
+          - deweb --version
+          - chkweb --version
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: LaTeX semantic checker
+  description: |
+    This program has been written in frustration because some constructs in
+    LaTeX are sometimes non-intuitive, and easy to forget. It is _not_ a
+    replacement for the built-in checker in LaTeX; however it catches some
+    typographic errors LaTeX oversees. In other words, it is Lint for LaTeX.
+    Filters are also provided for checking the LaTeX parts of CWEB documents.
+  homepage: https://www.nongnu.org/chktex
+  repository: https://savannah.nongnu.org/projects/chktex
+
+extra:
+  recipe-maintainers:
+    - bollwyvl
