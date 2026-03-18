@@ -5,11 +5,13 @@ set -eux -o pipefail
 ## maybe double-packed?
 ls configure || cd "${PKG_NAME}-${PKG_VERSION}"
 
-ls configure
+./configure --help
 
 # TODO: probably want pcre, but keep segfaulting with 8.44
 ./configure \
     "--prefix=${PREFIX}" \
+    "--libdir=${PREFIX}/lib" \
+    "--includedir=${PREFIX}/include" \
     --disable-pcre
 
 make all

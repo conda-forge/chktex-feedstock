@@ -38,11 +38,13 @@ requirements:
     - if: unix
       then:
         - ${{ compiler("c") }}
+        - ${{ compiler("cxx") }}
         - ${{ stdlib("c") }}
         - automake
         - gettext
       else:
         - ${{ compiler("m2w64_c") }}
+        - ${{ compiler("m2w64_cxx") }}
         - ${{ stdlib("m2w64_c") }}
         - m2-automake${{ am_version }}
         - m2-base
