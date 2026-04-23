@@ -1,7 +1,8 @@
 :: Delegate to the Unix script. We need to translate the key path variables
 :: to be Unix-y rather than Windows-y, though.
+@echo on
 
-copy "%RECIPE_DIR%\build.sh" .
+copy "%RECIPE_DIR%\build-chktex.sh" .
 
 set MSYSTEM=MINGW%ARCH%
 set MSYS2_PATH_TYPE=inherit
@@ -19,7 +20,4 @@ FOR /F "delims=" %%i IN ('cygpath.exe -u "%SP_DIR%"') DO set "SP_DIR=%%i"
 FOR /F "delims=" %%i IN ('cygpath.exe -u "%SRC_DIR%"') DO set "SRC_DIR=%%i"
 FOR /F "delims=" %%i IN ('cygpath.exe -u "%STDLIB_DIR%"') DO set "STDLIB_DIR=%%i"
 
-bash -lxc "./build.sh"
-if errorlevel 1 exit 1
-
-exit 0
+bash -lxc "./build-chktex.sh" || exit 1
