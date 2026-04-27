@@ -17,7 +17,7 @@ else
     ln -s "${PREFIX}/bin/perl" "${PREFIX}/bin/perl5"
 fi
 
-sed -iE "s/install: chktex ChkTeX.dvi/install: chktex/" Makefile.in
+sed -E --in-place "s/install: chktex ChkTeX.dvi/install: chktex/" Makefile.in
 
 # TODO: probably want pcre, but keep segfaulting with 8.44
 ./configure \
@@ -25,14 +25,16 @@ sed -iE "s/install: chktex ChkTeX.dvi/install: chktex/" Makefile.in
     "--includedir=${PREFIX}/include" \
     "--libdir=${PREFIX}/lib" \
     "--prefix=${PREFIX}" \
-    || cat config.log \
-    && exit 1
+    || ( \
+       cat config.log \
+       && exit 1 \
+    )
 
 make all
 
 make install
 
-sed -i "s/perl5/perl/" "${PREFIX}/bin/deweb"
+sed --in-place "s/perl5/perl/" "${PREFIX}/bin/deweb"
 
 if [[ "${target_platform}" == "win-64" ]]; then
     rm "${PREFIX}/Library/usr/bin/perl5.exe"
