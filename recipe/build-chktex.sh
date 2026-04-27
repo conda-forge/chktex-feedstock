@@ -11,7 +11,11 @@ ls configure || cd "${PKG_NAME}-${PKG_VERSION}"
 
 cp COPYING "${SRC_DIR}/COPYING" || echo "COPYING already correct"
 
-ln -s "${PREFIX}/bin/perl" "${PREFIX}/bin/perl5"
+if [[ "${target_platform}" == "win-64" ]]; then
+    ln -s "${PREFIX}/Library/usr/bin/perl.exe" "${PREFIX}/Library/usr/bin/perl5.exe"
+else
+    ln -s "${PREFIX}/bin/perl" "${PREFIX}/bin/perl5"
+fi
 
 sed -iE "s/install: chktex ChkTeX.dvi/install: chktex/" Makefile.in
 
@@ -30,6 +34,10 @@ make install
 
 sed -i "s/perl5/perl/" "${PREFIX}/bin/deweb"
 
-rm "${PREFIX}/bin/perl5"
+if [[ "${target_platform}" == "win-64" ]]; then
+    rm "${PREFIX}/Library/usr/bin/perl5.exe"
+else
+    rm "${PREFIX}/bin/perl5"
+fi
 
 make test
