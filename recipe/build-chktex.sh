@@ -14,7 +14,7 @@ else
     ln -s "${PREFIX}/bin/perl" "${PREFIX}/bin/perl5"
     export CFLAGS="${CFLAGS} -I${PREFIX}/include -I${PREFIX}/include/ncurses -I${PREFIX}/include/ncursesw"
     export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -L${PREFIX}/lib/ncurses -L${PREFIX}/lib/ncursesw"
-    export LIBS="${LIBS} -lncurses"
+    export LIBS="-lncurses"
 fi
 
 sed -E --in-place "s/install: chktex ChkTeX.dvi/install: chktex/" Makefile.in
