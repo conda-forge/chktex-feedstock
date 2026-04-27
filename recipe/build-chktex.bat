@@ -6,8 +6,6 @@ copy "%RECIPE_DIR%\build.sh" .
 set MSYSTEM=MINGW%ARCH%
 set MSYS2_PATH_TYPE=inherit
 set CHERE_INVOKING=1
-set CFLAGS="%CFLAGS%"
-set LDFLAGS="%LDFLAGS%"
 
 set "saved_recipe_dir=%RECIPE_DIR%"
 FOR /F "delims=" %%i IN ('cygpath.exe -u -p "%PATH%"') DO set "PATH_OVERRIDE=%%i"

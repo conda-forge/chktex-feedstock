@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -eux -o pipefail
 
-export CFLAGS="${CFLAGS} -I${PREFIX}/include -I${PREFIX}/include/ncurses -I${PREFIX}/include/ncursesw"
-export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -L${PREFIX}/lib/ncurses -L${PREFIX}/lib/ncursesw"
-export LIBS="-lncurses"
+export CFLAGS="${CFLAGS:-} -I${PREFIX}/include -I${PREFIX}/include/ncurses -I${PREFIX}/include/ncursesw"
+export LDFLAGS="${LDFLAGS:-} -L${PREFIX}/lib -L${PREFIX}/lib/ncurses -L${PREFIX}/lib/ncursesw"
+export LIBS="${LIBS:-} -lncurses"
 
 # https://github.com/conda-forge/chktex-feedstock/pull/8
 ## maybe double-packed?
