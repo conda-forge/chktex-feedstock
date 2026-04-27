@@ -25,7 +25,7 @@ sed -iE "s/install: chktex ChkTeX.dvi/install: chktex/" Makefile.in
     "--includedir=${PREFIX}/include" \
     "--libdir=${PREFIX}/lib" \
     "--prefix=${PREFIX}" \
-    || cat console.log \
+    || cat config.log \
     && exit 1
 
 make all
