@@ -47,18 +47,17 @@ requirements:
         - ${{ compiler("m2w64_c") }}
         - ${{ compiler("m2w64_cxx") }}
         - ${{ stdlib("m2w64_c") }}
-        - m2-automake${{ am_version }}
-        - m2-base
+        - ${{ posix_prefix }}automake${{ am_version }}
+        - ${{ posix_prefix }}base
   host:
     - ${{ posix_prefix }}ncurses
+    - ${{ posix_prefix }}perl
 
 tests:
   - script:
       - chktex --version
-      - if: unix
-        then:
-          - deweb --version
-          - chkweb --version
+      - deweb --version
+      - chkweb --version
 
 about:
   license: GPL-2.0-or-later
