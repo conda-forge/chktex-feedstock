@@ -42,6 +42,7 @@ requirements:
         - ${{ stdlib("c") }}
         - automake
         - gettext
+        - gnuconfig
       else:
         - ${{ compiler("m2w64_c") }}
         - ${{ compiler("m2w64_cxx") }}
