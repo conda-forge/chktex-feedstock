@@ -19,14 +19,14 @@ fi
 
 sed -iE "s/install: chktex ChkTeX.dvi/install: chktex/" Makefile.in
 
-./configure --help
-
 # TODO: probably want pcre, but keep segfaulting with 8.44
 ./configure \
     --disable-pcre \
     "--includedir=${PREFIX}/include" \
     "--libdir=${PREFIX}/lib" \
-    "--prefix=${PREFIX}"
+    "--prefix=${PREFIX}" \
+    || cat console.log \
+    && exit 1
 
 make all
 

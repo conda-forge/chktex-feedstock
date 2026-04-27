@@ -47,8 +47,8 @@ requirements:
         - ${{ compiler("m2w64_c") }}
         - ${{ compiler("m2w64_cxx") }}
         - ${{ stdlib("m2w64_c") }}
-        - ${{ posix_prefix }}automake${{ am_version }}
-        - ${{ posix_prefix }}base
+        - m2-automake${{ am_version }}
+        - m2-base
   host:
     - ${{ posix_prefix }}ncurses
     - ${{ posix_prefix }}perl
