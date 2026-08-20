@@ -19,9 +19,7 @@ source:
   sha256: cea81a1cde2f151db2b5d2adf2271becfd3c0c1f40eca5cf45b52beeb4a636f9
 
 build:
-  # TODO: see https://github.com/conda-forge/chktex-feedstock/issues/9
-  skip: win
-  number: 0
+  number: 1
   script:
     file: build-chktex
   dynamic_linking:
@@ -54,6 +52,12 @@ requirements:
   host:
     - ${{ posix_prefix }}ncurses
     - ${{ posix_prefix }}perl
+  run:
+    # deweb and chkweb are perl scripts, so perl is needed at run time. On
+    # unix this has been satisfied by the system perl their shebang points
+    # at; Windows has none, so the interpreter must ship with the package.
+    - if: win
+      then: m2-perl
 
 tests:
   - script:
