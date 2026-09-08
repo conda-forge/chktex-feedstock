@@ -21,7 +21,7 @@ source:
 build:
   # TODO: see https://github.com/conda-forge/chktex-feedstock/issues/9
   skip: win
-  number: 0
+  number: 1
   script:
     file: build-chktex
   dynamic_linking:
